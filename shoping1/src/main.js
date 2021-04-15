@@ -10,6 +10,13 @@ import "./assets/css/global.css";
 import axios from "axios";
 //设置基准路径
 axios.defaults.baseURL = "http://127.0.0.1:8888/api/private/v1/";
+//添加拦截器，  为需要授权的 API ，在请求头中使用 Authorization 字段提供 token 令牌
+axios.interceptors.request.use(config => {
+    // console.log(config);
+    config.headers.Authorization = window.sessionStorage.getItem('token');
+    //最后必须returnconfig
+    return config;
+});
 // 将axios插件挂载到Vue.prototype.$http原型上，其它组件就可以直接使用$http
 Vue.prototype.$http = axios;
 

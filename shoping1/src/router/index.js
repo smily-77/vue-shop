@@ -2,20 +2,59 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 //登录
 import Login from '../components/Login.vue'
+// 主页
 import Home from '../components/Home.vue'
+// 欢迎页面
+import Welcome from '../components/Welcome.vue'
+// 用户列表页
+import Users from '../components/user/Users.vue'
+// 角色列表
+import Roles from '../components/power/Roles.vue'
+//权限列表
+import Rights from '../components/power/Rights.vue'
+
+//商品列表
+import Goods from '../components/goods/Goods.vue'
+
+//分类参数
+import Params from '../components/goods/Params'
+
+//商品分类
+import Categories from '../components/goods/Categories'
+
+
+// 订单列表
+import Orders from '../components/order/Orders'
+
+// 数据报表
+import Reports from '../components/report/Reports'
 
 Vue.use(VueRouter)
 
 const routes = [
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
-    { path: '/home', component: Home },
+    {
+        path: '/home',
+        component: Home,
+        redirect: '/welcome',
+        children: [
+            { path: '/welcome', component: Welcome },
+            { path: '/users', component: Users },
+            { path: '/roles', component: Roles },
+            { path: '/rights', component: Rights },
+            { path: '/goods', component: Goods },
+            { path: '/params', component: Params },
+            { path: '/categories', component: Categories },
+            { path: '/orders', component: Orders },
+            { path: '/reports', component: Reports }
+        ],
+    },
 ]
 
 const router = new VueRouter({
     routes,
 })
-
 
 //添加路由守卫
 router.beforeEach((to, form, next) => {
@@ -26,6 +65,7 @@ router.beforeEach((to, form, next) => {
     //如果用户要访问登录路径，直接放行
     if (to.path === '/login') return next()
         //从sessionSTory中获取保存的token值
+
     var tokenStr = window.sessionStorage.getItem('token')
         //如果token不存在 跳转到登录界面
     if (!tokenStr) return next('/login')

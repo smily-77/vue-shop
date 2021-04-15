@@ -80,14 +80,14 @@ export default {
         if (!valida) return
         //预验证通过
         const { data: res } = await this.$http.post('/login', this.loginForm)
-        console.log(res)
+        // console.log(res)
         if (res.meta.status != 200)
           return (this.$message.error('登陆失败').showClose = true)
         this.$message.success('登录成功').showClose = true
         //1.登录成功后把token保存到sessionStorage中
         //1.1除了登录之外的所有API接口，必须在登陆之后才能访问
         // 1.2token只在当前网站打开期间生效，所以必须将token保存在sessionStorage中
-        sessionStorage.setItem('token', 'res.meta.token')
+        sessionStorage.setItem('token', res.data.token)
         // 2.通过编程式导航跳转页面 路由地址  /home
         this.$router.push('/home')
       })
