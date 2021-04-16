@@ -13,7 +13,7 @@
     <!-- 内容 -->
     <el-container>
       <!-- 内容侧边栏 -->
-      <el-aside :width="isCollapse?'64px':'200px'">
+      <el-aside :width="isCollapse ? '64px' : '200px'">
         <!-- 侧边栏卷边按钮 -->
         <div class="Collapebtn" @click="isCollapseBtn">|||</div>
         <!-- 侧边栏一级菜单 -->
@@ -31,7 +31,6 @@
             :index="item.id + ''"
             v-for="item in menusList"
             :key="item.id"
-           
           >
             <template slot="title">
               <!-- 菜单图标 -->
@@ -41,12 +40,10 @@
             </template>
             <!-- 侧边栏二级菜单 -->
             <el-menu-item
-              :index="'/'+submenu.path"
+              :index="'/' + submenu.path"
               :key="submenu.id"
               v-for="submenu in item.children"
-              @click="saveActiveStatus('/'+submenu.path)"
-              
-         
+              @click="saveActiveStatus('/' + submenu.path)"
             >
               <template slot="title">
                 <!-- 菜单图标 -->
@@ -72,7 +69,7 @@ export default {
   created() {
     this.geMenustList()
     // 刷新页面左侧菜单，当前激活的菜单高亮保持
-    this.activePath=window.sessionStorage.getItem('activePath')
+    this.activePath = window.sessionStorage.getItem('activePath')
   },
   data() {
     return {
@@ -89,8 +86,7 @@ export default {
       // 卷边按钮 默认不卷边
       isCollapse: false,
       // 保存激活的链接地址
-      activePath:'',
-      
+      activePath: '',
     }
   },
   methods: {
@@ -115,13 +111,12 @@ export default {
       this.isCollapse = !this.isCollapse
     },
     // 保存激活的链接，刷新页面当前激活的菜单高亮保持
-    saveActiveStatus:function(activePath){
+    saveActiveStatus: function (activePath) {
       // 刷新页面
-      window.sessionStorage.setItem('activePath',activePath);
+      window.sessionStorage.setItem('activePath', activePath)
       // 切换页面
-      this.activePath=activePath;
-    }
-  
+      this.activePath = activePath
+    },
   },
 }
 </script>
@@ -138,9 +133,9 @@ export default {
   color: #fff;
   font-size: 25px;
   padding-left: 5px;
-.el-button{
-  background-color: #f4ce7c;
-}
+  .el-button {
+    background-color: #f4ce7c;
+  }
   div {
     display: flex;
     align-items: center;
@@ -149,7 +144,7 @@ export default {
       display: inline-block;
       width: 50px;
       height: 50px;
-      border-radius: 50%;
+      border-radius:50%;
       padding-right: 10px;
     }
   }

@@ -3,7 +3,7 @@
     <div class="login_box">
       <!-- 标识 -->
       <div class="avatar_box">
-        <img src="../assets\images/logo.png" alt="" />
+        <img src="../assets\images/sign.png" alt="" />
       </div>
       <!-- 登录表单 -->
       <el-form
@@ -98,13 +98,13 @@ export default {
 
 <style lang="less" scoped>
 .login_container {
-  background-color: rgb(166, 197, 229);
+  background-color: rgb(163, 174, 134);
   height: 100%;
 }
 .login_box {
   width: 450px;
   height: 350px;
-  background: rgb(248, 254, 210);
+  background:rgb(240, 227, 218);
   border-radius: 5px;
   position: absolute;
   top: 50%;
