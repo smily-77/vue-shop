@@ -100,7 +100,7 @@ export default {
     // 获取菜单列表方法
     async geMenustList() {
       const { data: res } = await this.$http.get('/menus')
-      //console.log(res)
+      console.log(res)
       if (res.meta.status != 200) return this.$message.error(res.meta.msg)
       // 将获取的菜单数组赋值给menusList数组
       this.menusList = res.data
@@ -145,7 +145,7 @@ export default {
       width: 50px;
       height: 50px;
       border-radius:50%;
-      padding-right: 10px;
+      margin-right: 10px;
     }
   }
 }

@@ -74,7 +74,7 @@
             <el-tooltip
               effect="dark"
               content="分配角色"
-              placement="top"
+              placement="top" 
               :enterable="false"
             >
               <el-button type="warning" icon="el-icon-setting"></el-button>
@@ -283,7 +283,7 @@ export default {
       )
       // console.log(res)
       if (res.meta.status !== 200) {
-        userInfo.mg_state = !userInfo.me_state
+        userInfo.mg_state = !userInfo.mg_state
         return this.$message.error('修改用户状态失败')
       }
       this.$message.success('修改用户状态成功')
