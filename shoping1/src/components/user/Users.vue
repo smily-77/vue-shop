@@ -3,7 +3,7 @@
     <!-- 面包屑导航区域 -->
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item><a href="/">用户管理</a></el-breadcrumb-item>
+      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
       <el-breadcrumb-item>用户列表</el-breadcrumb-item>
     </el-breadcrumb>
     <!-- 卡片区域 -->
@@ -56,7 +56,7 @@
             ></el-switch>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="300">
           <template slot-scope="scope">
             <!--编辑按钮 -->
             <el-button
@@ -77,7 +77,11 @@
               placement="top" 
               :enterable="false"
             >
-              <el-button type="warning" icon="el-icon-setting"></el-button>
+              <el-button
+                type="warning"
+                icon="el-icon-setting"
+                @click="setRoleDialogShow(scope.row)"
+              ></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -159,6 +163,35 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="editDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="editUser">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 分配权限对话框 -->
+    <el-dialog
+      title="分配权限"
+      :visible.sync="setRoleDialogVisible"
+      width="50%"
+      @close="setRoleCloseDialog"
+    >
+      <!-- 分配权限对话框的主体内容 -->
+      <p>当前的用户 : {{ this.setRoleUser.username }}</p>
+      <p>当前的角色 : {{ this.setRoleUser.role_name }}</p>
+      <p>
+        分配新的角色
+        <!-- 权限角色选择器 -->
+        <el-select v-model="seletedRoleId" placeholder="请选择">
+          <el-option
+            v-for="item in rolesList"
+            :key="item.id"
+            :label="item.roleName"
+            :value="item.id"
+          >
+          </el-option>
+        </el-select>
+      </p>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setRoleDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="saveSetRole">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -243,6 +276,14 @@ export default {
           { validator: checkMobile, trigger: 'blur' },
         ],
       },
+      //分配权限对话框的显示和隐藏
+      setRoleDialogVisible: false,
+      // 将要分配权限的用户信息
+      setRoleUser: [],
+      // 角色列表
+      rolesList: [],
+      // 分配权限框中 角色select框中 绑定的id值
+      seletedRoleId: '',
     }
   },
 
@@ -389,6 +430,50 @@ export default {
       this.$message.success('删除用户成功')
       // 重新加载用户列表数据
       this.getUsersList()
+    },
+
+    // 分配权限按钮 显示对话框
+    async setRoleDialogShow(role) {
+      // this.seletedRoleId = role.role_name
+      // 将点击的当前用户信息赋值给data里将要授权的用户信息数组setRoleUser
+      this.setRoleUser = role
+ 
+      // 获取所有权限角色列表
+      const { data: res } = await this.$http.get('/roles')
+      // console.log(res)
+      if (res.meta.status != 200) return this.$message.error('获取角色列表失败')
+      // 获取成功 将获取到的值保存到data的rolesList中
+      this.rolesList = res.data
+      this.setRoleDialogVisible = true
+    },
+
+    // 分配权限按钮对话框的确认按钮 保存分配的权限角色
+    async saveSetRole() {
+      // 用户没有选择
+      if (!this.seletedRoleId)
+        return this.$message.error('请选择分配的新的角色')
+      // 用户有选择
+      const { data: res } = await this.$http.put(
+        `/users/${this.setRoleUser.id}/role`,
+        {
+          rid: this.seletedRoleId,
+        }
+      )
+      console.log(res)
+      if (res.meta.status != 200) return this.$message.error('分配角色失败')
+      // 分配权限角色成功
+      // 更新用户信息
+      this.getUsersList()
+      // 关闭权限设置对话框
+      this.setRoleDialogVisible = false
+    },
+    
+    // 监听分配权限对话框的关闭
+    setRoleCloseDialog() {
+      // 将要分配权限的用户信息数组 setRoleUser 和
+      //  分配权限框中 角色select框中 绑定的id值 seletedRoleId 置空
+      this.setRoleUser = []
+      this.seletedRoleId = ''
     },
   },
 }
