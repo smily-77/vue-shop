@@ -112,6 +112,7 @@
             :props="parentCateProps"
             @change="parentCateChange"
             clearable
+            change-on-select
             class="parentSelect"
           ></el-cascader>
         </el-form-item>
