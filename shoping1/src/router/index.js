@@ -15,12 +15,16 @@ import Rights from '../components/power/Rights.vue'
 
 //商品列表
 import Goods from '../components/goods/Goods.vue'
+// 添加商品
+import Add from '../components/goods/Add.vue'
 
 //分类参数
 import Params from '../components/goods/Params'
 
 //商品分类
 import Categories from '../components/goods/Categories'
+
+
 
 
 // 订单列表
@@ -47,7 +51,8 @@ const routes = [
             { path: '/params', component: Params },
             { path: '/categories', component: Categories },
             { path: '/orders', component: Orders },
-            { path: '/reports', component: Reports }
+            { path: '/reports', component: Reports },
+            { path: '/goods/add', component: Add }
         ],
     },
 ]

@@ -4,7 +4,7 @@
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-      <el-breadcrumb-item>商品列表</el-breadcrumb-item>
+      <el-breadcrumb-item>商品分类</el-breadcrumb-item>
     </el-breadcrumb>
 
     <!-- 卡片视图 -->
@@ -190,7 +190,7 @@ export default {
           template: 'opt',
         },
       ],
-      // T添加分类对话框的显示和隐藏
+      // 添加分类对话框的显示和隐藏
       addCateDialogVisible: false,
       // 父级分类数据
       parentCateList: [],
@@ -308,7 +308,7 @@ export default {
     addCateDianlogClose() {
       this.$refs.addCateRef.resetFields()
       this.aprentId = []
-      this.addCate.cat_pid = ''
+      this.addCate.cat_pid = 0
       this.addCate.cat_level = 0
     },
 
