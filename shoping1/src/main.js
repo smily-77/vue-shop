@@ -10,7 +10,8 @@ import './assets/css/global.css'
 import TreeTable from 'vue-table-with-tree-grid'
 // 引入富文本编辑器组件
 import VueQuillEditor from 'vue-quill-editor'
-
+// // 引入echarts可视化组件
+// import echarts from 'echarts'
 
 
 // 设置富文本编辑器的样式
@@ -30,7 +31,7 @@ axios.interceptors.request.use((config) => {
     })
     // 将axios插件挂载到Vue.prototype.$http原型上，其它组件就可以直接使用$http
 Vue.prototype.$http = axios
-
+    // Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
 
