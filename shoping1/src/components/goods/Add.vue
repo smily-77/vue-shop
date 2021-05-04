@@ -289,11 +289,13 @@ export default {
 
       // 找到零时地址在pics中的索引
       const i = this.addGoodList.pics.findIndex((x) => {
-        x.pic = picPath
+        x.pic === picPath
       })
+
+      
       // 根据索引删除在pics数组中删除改零时地址
       this.addGoodList.pics.splice(i, 1)
-      console.log(this.addGoodList)
+      console.log(typeof(this.addGoodList.pics))
     },
 
     //监听图片上传成功
@@ -303,6 +305,7 @@ export default {
       // 将图片信息对象push到addGoodList的pics数组中
       this.addGoodList.pics.push(picInfo)
       console.log(this.addGoodList)
+      console.log(this.addGoodList.pics)
     },
     
     // 添加商品按钮
@@ -333,7 +336,7 @@ export default {
               attr_value:item.attr_vals
             }
             this.addGoodList.attrs.push(newQuery)
-          })
+          }) 
           form.attrs=this.addGoodList.attrs
         //  console.log(form)
         // 发送添加商品亲求
@@ -343,6 +346,7 @@ export default {
       // 请求成功
       this.$message.success('添加商品成功')
       this.$router.push('/goods')
+      console.log(this.addGoodList.goods_cat)
 
 
 

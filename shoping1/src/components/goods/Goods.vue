@@ -51,7 +51,7 @@
         </el-table-column>
         <el-table-column label="操作" width="180px">
           <template slot-scope="scope">
-            <el-button type="primary" size="mini">编辑</el-button>
+            <el-button type="primary" size="mini" @click="showEdit(scope.row.goods_id)">编辑</el-button>
             <el-button
               type="warning"
               size="mini"
@@ -148,6 +148,11 @@ export default {
     // 添加商品按钮
     addGoods(){
         this.$router.push('/goods/add')
+    },
+
+    showEdit(id){
+      this.$router.push({path:'/goods/edit', query:{id:id}})
+
     }
   },
 }
