@@ -18,9 +18,11 @@
       </el-alert>
       <!-- 选择分类区域 -->
       <el-row class="select">
-        <el-col>
+        <el-col :span="3" class="span">
           <span>选择商品分类 : </span>
           <!-- 级联选择框 -->
+        </el-col>
+        <el-col :span="8">
           <el-cascader
             v-model="cateKeys"
             :options="cateList"
@@ -518,4 +520,9 @@ export default {
 .input-new-tag {
   width: 120px !important;
 }
+.span{
+  height:40px;
+  line-height: 40px;
+}
+
 </style>
