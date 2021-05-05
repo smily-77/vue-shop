@@ -5,7 +5,7 @@
       <!-- 顶部右侧图标和文字 -->
       <div>
         <img src="../assets/images/logo.png" alt="" />
-        <span>电商管理后台系统</span>
+        <span>电商后台管理系统</span>
       </div>
       <!-- 顶部退出登录按钮 -->
       <el-button type="info" @click="logout">退出</el-button>
