@@ -44,8 +44,8 @@ export default {
     return {
       //登录表单的数据对象
       loginForm: {
-        username: 'admin',
-        password: '123456',
+        username: '',
+        password: '',
       },
       loginRules: {
         username: [

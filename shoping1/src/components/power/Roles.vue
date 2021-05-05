@@ -27,9 +27,8 @@
               :class="['dbbottom', i1 === 0 ? 'dbtop' : '', , 'vcenter']"
             >
               <!-- 一级权限 -->
-              <el-col :span="5">
-                <el-tag
-                  :class="['vcenter']"
+              <el-col :span="5" :class="['vcenter']">
+                <el-tag  
                   closable
                   @close="removeRights(scope.row, items1.id)"
                   >{{ items1.authName }}</el-tag
@@ -426,5 +425,6 @@ export default {
 .vcenter {
   display: flex;
   align-items: center;
+  
 }
 </style>
